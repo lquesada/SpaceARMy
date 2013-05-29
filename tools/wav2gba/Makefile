@@ -1,7 +1,5 @@
-# Flags
 CFLAGS      = -g -Wall
 
-# Programa
 EXE = wav2gba
 SOURCE = $(EXE).cpp
 
