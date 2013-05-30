@@ -8,5 +8,4 @@ all : $(SOURCE)
 
 clean:
 	rm -f $(EXE)
-	rm -f *~
 
