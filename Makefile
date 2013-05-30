@@ -39,15 +39,19 @@ build:
 	mkdir build
 
 spacearmy.gba : build/spacearmy-wrongchecksum.gba
+	tools/gba-header/gba-header -i $< -o $@ -fix -title SpaceARMy
 
 build/spacearmy-wrongchecksum.gba : build/spacearmy.elf
+	$(OBJCOPY) -O binary $<  $@
 
-#build/spacearmy.elf : $(OBJS) $(SOUNDS) $(BACKGROUNDS) build/spritedata.o $(LIBGBA)
-build/spacearmy.elf : $(SOUNDS) $(BACKGROUNDS) build/spritedata.o
-
-
+#build/spacearmy.elf : build $(OBJS) $(SOUNDS) $(BACKGROUNDS) build/spritedata.o $(LIBGBA)
+#	$(LD) $(LDFLAGS) $(OBJS) -o $@ $(LIBS)
+build/spacearmy.elf : build $(SOUNDS) $(BACKGROUNDS) build/spritedata.o
 
 #    Sounds
+
+build/%_s.o : build/%.c
+	$(CC) $(CFLAGS) $< -o $@
 
 build/%_s.c : build/%_s.bin $(BIN2C)
 	$(BIN2C) $< $@
@@ -55,7 +59,11 @@ build/%_s.c : build/%_s.bin $(BIN2C)
 build/%_s.bin : res/%.wav $(WAV2GBA)
 	$(WAV2GBA) $< $@
 
+
 #    Backgrounds
+
+build/%_b.o : build/%.c
+	$(CC) $(CFLAGS) $< -o $@
 
 build/%_b.c : res/%.bmp 
 	$(GFX2GBA) -obuild -fsrc -c32k $<
