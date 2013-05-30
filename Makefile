@@ -13,7 +13,7 @@ ASFLAGS     = -I libgba -mcpu=arm7tdmi -gstabs
 CFLAGS      = -I libgba/ -g -Wall -mcpu=arm7tdmi -c
 LDFLAGS     = -L libgba/ -Tlibgba/cart.ld -nostartfiles
 
-OBJS        = build/matamarcianos.o build/contador.o build/enemigo.o build/pausa.o build/disparobueno.o build/disparomalo.o build/escudo.o build/jugador.o build/colisiones.o build/explosion.o build/sonido.o
+OBJS        = build/spacearmy.o build/counter.o build/armyguy.o build/pause.o build/playershot.o build/armyshot.o build/shield.o build/player.o build/collisions.o build/explosion.o build/sound.o
 STARTUP = build/startup.o
 SOUNDS = build/gameover_s.o build/playershot_s.o build/armyshot_s.o build/playerexplosion_s.o build/armyexplosion_s.o build/congratulations_s.o build/tic_s.o build/armydeath_s.o build/explosion_s.o build/welcome_s.o
 BACKGROUNDS = build/bg_b.o build/bgpause_b.o build/bgsplash_b.o
