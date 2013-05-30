@@ -1,2 +1,4 @@
 /build
 /SpaceARMy.gba
+/tools/bin2c/bin2c
+/tools/wav2gba/wav2gba
