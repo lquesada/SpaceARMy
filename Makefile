@@ -37,7 +37,12 @@ spacearmy.gba : build/spacearmy-wrongchecksum.gba
 
 build/spacearmy-wrongchecksum.gba : resources
 
+
+# Resources
+
 resources : $(SOUND)
+
+#    Sounds
 
 build/%_s.o : build/%_s.c
 	$(CC) $(CFLAGS) $< -o $@
@@ -48,11 +53,15 @@ build/%_s.c : build/%_s.bin $(BIN2C)
 build/%_s.bin : res/%.wav $(WAV2GBA)
 	$(WAV2GBA) $< $@
 
+# Tools
+
 $(BIN2C):
 	make -C tools/bin2c
 
 $(WAV2GBA):
 	make -C tools/wav2gba
+
+# Clean
 
 clean:
 	make -C tools/wav2gba/ clean
