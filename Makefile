@@ -12,7 +12,8 @@ BIN2C        = tools/bin2c/bin2c
 
 CFLAGS      = $(INCDIR) -g -Wall -mcpu=arm7tdmi -c
 
-SOUND = build/gameover_s.o build/playershoot_s.o build/armyshoot_s.o build/playerexplosion_s.o build/armyexplosion_s.o build/congratulations_s.o build/tic_s.o build/armydeath_s.o build/explosion_s.o build/welcome_s.o
+SOUNDS = build/gameover_s.o build/playershoot_s.o build/armyshoot_s.o build/playerexplosion_s.o build/armyexplosion_s.o build/congratulations_s.o build/tic_s.o build/armydeath_s.o build/explosion_s.o build/welcome_s.o
+BACKGROUNDS = build/bg_b.o build/bgpause_b.o build/bgsplash_b.o
 
 all: checkpath build spacearmy.gba
 
@@ -40,18 +41,25 @@ build/spacearmy-wrongchecksum.gba : resources
 
 # Resources
 
-resources : $(SOUND)
+resources : $(SOUND) $(BACKGROUNDS)
 
 #    Sounds
-
-build/%_s.o : build/%_s.c
-	$(CC) $(CFLAGS) $< -o $@
 
 build/%_s.c : build/%_s.bin $(BIN2C)
 	$(BIN2C) $< $@
 
 build/%_s.bin : res/%.wav $(WAV2GBA)
 	$(WAV2GBA) $< $@
+
+#    Backgrounds
+build/%_b.c : res/%.bmp 
+	$(GFX2GBA) -obuild -fsrc -c32k $<
+	mv "`echo $@ | sed s/'_b\.c'/'.raw.c'/g`" "$@"
+
+# Object code
+
+build/%.o : build/%.c
+	$(CC) $(CFLAGS) $< -o $@
 
 # Tools
 
