@@ -1,7 +1,9 @@
 SpaceARMy
 =========
 
-Shoot 'Em Up game for the Game Boy Advance (ARM7TDMI)
+SpaceARMy (Shoot 'Em Up game for the Game Boy Advance (ARM7TDMI)).  
+Copyright (c) 2013, Luis Quesada - https://github.com/lquesada
+
 
 In order to compile SpaceARMy:
 
