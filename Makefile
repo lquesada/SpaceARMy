@@ -9,8 +9,8 @@ GIFS2SPRITES = wine tools/gifs2sprites/gifs2sprites.exe
 WAV2GBA      = tools/wav2gba/wav2gba
 BIN2C        = tools/bin2c/bin2c
 
-ASFLAGS     = -I libgba -mcpu=arm7tdmi -gstabs
-CFLAGS      = -I libgba/ -g -Wall -mcpu=arm7tdmi -c
+ASFLAGS     = -I libgba/ -I libgba/include -mcpu=arm7tdmi -gstabs
+CFLAGS      = -I libgba/ -I libgba/include -g -Wall -mcpu=arm7tdmi -c
 LDFLAGS     = -L libgba/ -Tlibgba/cart.ld -nostartfiles
 
 OBJS        = build/spacearmy.o build/counter.o build/armyguy.o build/pause.o build/playershot.o build/armyshot.o build/shield.o build/player.o build/collisions.o build/explosion.o build/sound.o
@@ -108,4 +108,5 @@ clean:
 	make -C tools/wav2gba/ clean
 	make -C tools/bin2c/ clean
 	rm -rf build
+	rm -rf SpaceARMy.gba
 
