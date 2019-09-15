@@ -7,6 +7,8 @@ Copyright (c) 2009, Luis Quesada Torres - https://github.com/lquesada | www.luis
 
 SpaceARMy uses libgba - https://github.com/jesusatc/libgba
 
+Check https://github.com/lquesada/SpaceARMy/releases for the compiled ROM and a video of gameplay.
+
 In order to compile SpaceARMy:
 
 1. Download the GNU Tools for ARM Embedded Processors from https://launchpad.net/gcc-arm-embedded
