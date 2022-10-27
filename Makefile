@@ -1,3 +1,5 @@
+TOOLCHAINPATH ?= ~/tool_chain/gcc-arm-none-eabi-4_7-2013q1
+
 TARGET = arm-none-eabi
 
 AS           = $(TOOLCHAINPATH)/bin/$(TARGET)-as
@@ -5,13 +7,13 @@ CC           = $(TOOLCHAINPATH)/bin/$(TARGET)-gcc
 LD           = $(TOOLCHAINPATH)/bin/$(TARGET)-ld
 OBJCOPY      = $(TOOLCHAINPATH)/bin/$(TARGET)-objcopy
 GFX2GBA      = tools/gfx2gba/gfx2gba-static
-GIFS2SPRITES = wine tools/gifs2sprites/gifs2sprites.exe
+#GIFS2SPRITES = wine tools/gifs2sprites/gifs2sprites.exe
 WAV2GBA      = tools/wav2gba/wav2gba
 BIN2C        = tools/bin2c/bin2c
 
 ASFLAGS     = -I libgba/ -I libgba/include -mcpu=arm7tdmi -gstabs
-CFLAGS      = -I libgba/ -I libgba/include -g -Wall -mcpu=arm7tdmi -c
-LDFLAGS     = -L libgba/ -Tlibgba/cart.ld -nostartfiles
+CFLAGS      = -I libgba/ -I libgba/include -g -Wall -mcpu=arm7tdmi -fgnu89-inline -nostartfiles -c
+LDFLAGS     = -L libgba/ -Tlibgba/cart.ld
 
 OBJS        = build/spacearmy.o build/counter.o build/armyguy.o build/pause.o build/playershot.o build/armyshot.o build/shield.o build/player.o build/collisions.o build/explosion.o build/sound.o
 STARTUP = build/startup.o
@@ -19,7 +21,7 @@ SOUNDS = build/gameover_s.o build/playershot_s.o build/armyshot_s.o build/player
 BACKGROUNDS = build/bg_b.o build/bgpause_b.o build/bgsplash_b.o
 SPRITES = build/spritedata.o
 
-SPRITELIST = res/player.gif res/army1a.gif res/army1b.gif res/army2a.gif res/army2b.gif res/army3a.gif res/army3b.gif res/army4a.gif res/army4b.gif res/army5a.gif res/army5b.gif res/army6a.gif res/army6b.gif res/army7a.gif res/army7b.gif res/playershot.gif res/armyshot.gif res/shield1.gif res/shield2.gif res/shield3.gif res/explosion1.gif res/explosion2.gif res/explosion3.gif res/explosion4.gif res/explosionb1.gif res/explosionb2.gif res/explosionb3.gif res/explosionb4.gif res/explosionc1.gif res/explosionc2.gif res/explosionc3.gif res/explosionc4.gif res/explosiond1.gif res/explosiond2.gif res/explosiond3.gif res/explosiond4.gif
+#SPRITELIST = res/player.gif res/army1a.gif res/army1b.gif res/army2a.gif res/army2b.gif res/army3a.gif res/army3b.gif res/army4a.gif res/army4b.gif res/army5a.gif res/army5b.gif res/army6a.gif res/army6b.gif res/army7a.gif res/army7b.gif res/playershot.gif res/armyshot.gif res/shield1.gif res/shield2.gif res/shield3.gif res/explosion1.gif res/explosion2.gif res/explosion3.gif res/explosion4.gif res/explosionb1.gif res/explosionb2.gif res/explosionb3.gif res/explosionb4.gif res/explosionc1.gif res/explosionc2.gif res/explosionc3.gif res/explosionc4.gif res/explosiond1.gif res/explosiond2.gif res/explosiond3.gif res/explosiond4.gif
 
 LIBGBA      = libgba/libgba.a
 
@@ -80,8 +82,10 @@ build/%_b.c : res/%.bmp
 
 # Sprites
 
-build/spritedata.c : $(SPRITELIST)
-	$(GIFS2SPRITES) 256 build/spritedata.h $(SPRITELIST)
+#build/spritedata.c : $(SPRITELIST)
+build/spritedata.c :
+	#$(GIFS2SPRITES) 256 build/spritedata.h $(SPRITELIST)
+	cp res/spritedata.h build/spritedata.h
 	mv build/spritedata.h build/spritedata.c
 
 # Object code
@@ -107,6 +111,7 @@ $(WAV2GBA):
 clean:
 	make -C tools/wav2gba/ clean
 	make -C tools/bin2c/ clean
+	make -C libgba/ clean
 	rm -rf build
 	rm -rf SpaceARMy.gba
 

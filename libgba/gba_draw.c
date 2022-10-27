@@ -276,7 +276,7 @@ void gba_draw_char(u_char the_char)
   // TODO
   // This function should correctly handle both negative values and
   // greater than SCREEN_WIDTH and SCREEN_HEIGHT values
-  short i, deltax, deltay, numpixels;
+  short deltax, deltay, numpixels;
   u_short i, j;          /* Para recorrer el bitmap del carácter */
   u_char pintar;         /* Si es TRUE hay que pintar el píxel del carácter */
   u_short bitmaps_width; /* Ancho total de los bitmaps en píxeles */

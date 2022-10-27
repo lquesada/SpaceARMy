@@ -14,7 +14,7 @@ extern playershot playershots[PLAYERSHOT_AMOUNT];
 extern armyshot armyshots[ARMYSHOT_AMOUNT];
 extern armyguy armyguys[ARMYGUY_AMOUNT];
 extern player player_active;
-shield shields[SHIELD_AMOUNT*3];
+extern shield shields[SHIELD_AMOUNT*3];
 
 
 void check_collisions();

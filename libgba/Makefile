@@ -1,11 +1,14 @@
+TOOLCHAINPATH ?= ~/tool_chain/gcc-arm-none-eabi-4_7-2013q1
+
 TARGET = arm-none-eabi
+
 AR           = $(TOOLCHAINPATH)/bin/$(TARGET)-ar
 AS           = $(TOOLCHAINPATH)/bin/$(TARGET)-as
 CC           = $(TOOLCHAINPATH)/bin/$(TARGET)-gcc
 
 INCDIR      = -I include
 ASFLAGS     = $(INCDIR) -mcpu=arm7tdmi -mfpu=softfpa -gstabs
-CFLAGS      = $(INCDIR) -g -Wall -mcpu=arm7tdmi -c
+CFLAGS      = $(INCDIR) -g -Wall -mcpu=arm7tdmi -fgnu89-inline -c
 ARFLAGS     = -crs
 
 LIB         = libgba.a
